@@ -1,8 +1,13 @@
 import { MouseEvent, useState } from "react";
 
-function ListGroup() {
-  let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
+/* Using an interface to pass in data using Props. */
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
 
+function ListGroup({ items, heading, onSelectItem }: Props) {
   /* Using a State Hook, we can tell react that this Component will have data or state that will change over time.
      This Event Handler uses an array with a variable (selectedIndex) and a Function (SetSelectedIndex)*/
   const [selectedIndex, SetSelectedIndex] = useState(-1);
@@ -14,13 +19,13 @@ function ListGroup() {
     return items.length === 0 && <p>Function test.</p>;
   };
 
-  /* Another way an event can be used to handle mouseclicks */
+  /* Another way an event can be used to handle mouseclicks - specify handleClick in the onClick attribute */
   const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     <>
       {/* Using a Fragment "<>, </>" to group multiple elements in a return statement, this way it doesn't create an extra element in the DOM, like a div. */}
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {message}
       {getMessage()}
       <ul className="list-group">
@@ -34,6 +39,7 @@ function ListGroup() {
             key={item}
             onClick={() => {
               SetSelectedIndex(index);
+              onSelectItem(item);
             }}
           >
             {item}
