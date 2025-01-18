@@ -2,6 +2,7 @@ import { useState } from "react";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
+import NewFeature from "./components/NewFeature";
 
 function App() {
   let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
@@ -23,6 +24,8 @@ function App() {
       <Button color="danger" onClick={() => SetAlertVisibility(true)}>
         My Button
       </Button>
+
+      <NewFeature />
 
       <ListGroup
         items={items}
